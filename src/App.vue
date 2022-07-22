@@ -1,9 +1,6 @@
 <template>
   <div class="app">
-    App.vue
-    <div class="box">
-
-    </div>
+    <router-view />
   </div>
 </template>
 
