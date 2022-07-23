@@ -21,7 +21,8 @@
           :rules="rules.code"
       />
       <div style="margin: 16px;">
-        <van-button round block type="info" native-type="submit" :loading="loading" loading-text="加载中...">登录</van-button>
+        <van-button round block type="info" native-type="submit" :loading="loading" loading-text="加载中...">登录
+        </van-button>
       </div>
     </van-form>
   </div>
@@ -30,13 +31,15 @@
 <script>
 //导入网络请求
 import {loginAPI} from "@/api";
+// 导入操作token的方法
+import {setToken} from "@/utils/auth";
 
 export default {
   data() {
     return {
       mobile: '',
       code: '',
-      loading:false,
+      loading: false,
       rules: {
         //手机号的校验规则
         mobile: [
@@ -54,22 +57,33 @@ export default {
   },
 
   methods: {
-    onSubmit(data) {//data:{mobile:'',code:''}
+    async onSubmit(data) {//data:{mobile:'',code:''}
       //设置按钮为加载状态
-      this.loading = true
-      loginAPI(data)
-          .then((res) => {
-            //服务器返回的内容为:res.data.data
-            //提示登录成功
-            this.$toast.success('登录成功');
-          })
-          .catch((err) => {
-            this.$toast.fail('登录失败');
-          })
-          .finally(()=>{
-            //关闭加载状态
-            this.loading = false
-          })
+      this.loading = true;
+      try {
+        const res = await loginAPI(data)
+        //保存返回的token
+        setToken(res.data.data)
+        //提示登录成功
+        this.$toast.success('登录成功');
+      } catch (e) {
+        this.$toast.fail('登录失败');
+      } finally {
+        //关闭加载状态
+        this.loading = false
+      }
+      // .then((res) => {
+      //   //服务器返回的内容为:res.data.data
+      //   //提示登录成功
+      //   this.$toast.success('登录成功');
+      // })
+      // .catch((err) => {
+      //   this.$toast.fail('登录失败');
+      // })
+      // .finally(()=>{
+      //   //关闭加载状态
+      //   this.loading = false
+      // })
     },
   }
 }
