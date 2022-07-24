@@ -37,8 +37,8 @@ import {setToken} from "@/utils/auth";
 export default {
   data() {
     return {
-      mobile: '',
-      code: '',
+      mobile: 13911111111,
+      code: 246810,
       loading: false,
       rules: {
         //手机号的校验规则
@@ -62,10 +62,19 @@ export default {
       this.loading = true;
       try {
         const res = await loginAPI(data)
-        //保存返回的token
-        setToken(res.data.data)
+        //保存返回的token(保存在两个地方localstorage & vuex)
+        this.$store.commit('setToken',res.data.data)
         //提示登录成功
         this.$toast.success('登录成功');
+        //得到路径中的参数:
+        const url = this.$route.query.url
+        if (url){
+          //跳转到url对应的路径中
+          this.$router.push(url)
+        } else {
+          //跳转到首页
+          this.$router.push('/layout/home')
+        }
       } catch (e) {
         this.$toast.fail('登录失败');
       } finally {

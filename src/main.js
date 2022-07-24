@@ -8,10 +8,15 @@ import '@/utils/vant'
 import '@/style/index.less'
 //导入flexible(给rem设置基准值)
 import 'amfe-flexible'
+//导入store
+import store from "@/store";
 
 Vue.config.productionTip = false
 
 new Vue({
+    //挂载vuex
+    store,
+    //挂载router
     router,
     render: h => h(App)
 }).$mount('#app')

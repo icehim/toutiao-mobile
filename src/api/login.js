@@ -10,3 +10,17 @@ export const login = (data) => {
         data
     })
 }
+
+//获取用户个人资料
+export function getUserInfo(){
+    return request({
+        url:'/v1_0/user/profile',
+    })
+}
+
+//刷新用户token
+export function refreshToken() {
+    return request({
+
+    })
+}
