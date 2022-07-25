@@ -19,8 +19,8 @@
     </van-nav-bar>
     <!--    频道区域-->
     <van-tabs>
-      <van-tab v-for="(item,index) in channelList" :key="item.id" :title="item.name">
-        <newList>
+      <van-tab v-for="(item,index) in channelList" :key="index" :title="item.name">
+        <newList :channel_id="item.id">
 
         </newList>
       </van-tab>

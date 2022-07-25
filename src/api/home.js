@@ -2,8 +2,19 @@
 import request from "@/utils/request";
 
 //获取用户的频道
-export function getUserChannel(){
+export function getUserChannel() {
     return request({
-        url:'/v1_0/user/channels/',
+        url: '/v1_0/user/channels/',
+    })
+}
+
+//获取文章新闻推荐
+// params:
+//      channel_id
+//      timestamp
+export function getNewList(params) {
+    return request({
+        url: '/v1_0/articles',
+        params
     })
 }
