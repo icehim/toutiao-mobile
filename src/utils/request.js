@@ -74,6 +74,5 @@ instance.interceptors.response.use(response => {
     return Promise.reject(error)    //.catch
 })
 
-
 //暴露副本对象
 export default instance

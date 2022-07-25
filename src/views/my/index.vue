@@ -24,10 +24,10 @@
       </van-grid>
       <!--其他信息-->
       <van-cell-group>
-        <van-cell title="编辑资料" is-link icon="edit"/>
+        <van-cell to="/my/edit" title="编辑资料" is-link icon="edit"/>
         <van-cell title="小智同学" is-link icon="chat-o"/>
         <van-cell title="系统设置" is-link icon="setting-o"/>
-        <van-cell title="退出登录" is-link icon="info-o"/>
+        <van-cell @click="logout" title="退出登录" is-link icon="info-o"/>
       </van-cell-group>
     </div>
   </div>
@@ -39,15 +39,34 @@ import {getUserInfoAPI} from "@/api";
 export default {
   data(){
     return {
-      //当前登录用户的信息
-      userInfo:{}
+      // //当前登录用户的信息
+      // userInfo:{}
+    }
+  },
+  computed:{
+    userInfo:function () {
+      return this.$store.state.userInfo
     }
   },
   async created() {
-    //获取当前登录的用户信息
-    const res = await getUserInfoAPI();
-    // 保存登录信息
-    this.userInfo = res.data.data
+    // //获取当前登录的用户信息
+    // const res = await getUserInfoAPI();
+    // // 保存登录信息
+    // this.userInfo = res.data.data
+    // //将用户信息保存到vuex中
+    // this.$store.commit('setUserInfo',res.data.data)
+    this.$store.dispatch('setUserInfo');
+  },
+  methods:{
+    //推出登录
+    logout() {
+      //清楚登录相关的信息
+      this.$store.commit('logout');
+      //重新回到登录页面
+      this.$router.push('/login');
+      //提示推出成成功
+      this.$toast.success('推出成功');
+    }
   }
 }
 </script>

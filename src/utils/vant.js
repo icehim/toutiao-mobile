@@ -1,8 +1,20 @@
 //负责用来按需导入vant中的组件
 import Vue from "vue";
-import { NavBar,Form,Field,Button,Toast,Tabbar, TabbarItem,Grid, GridItem,Cell, CellGroup } from 'vant';
+import { NavBar,Form,Field,Button,Toast,Tabbar, TabbarItem,Grid, GridItem,Cell, CellGroup,Dialog } from 'vant';
 import { Image as VanImage } from 'vant';
+import { Popup } from 'vant';
+import { DatetimePicker } from 'vant';
+import { Uploader } from 'vant';
+import { Icon } from 'vant';
+import { Tab, Tabs } from 'vant';
 
+Vue.use(Tab);
+Vue.use(Tabs);
+Vue.use(Icon);
+Vue.use(Uploader);
+Vue.use(DatetimePicker);
+Vue.use(Popup)
+Vue.use(Dialog);
 Vue.use(Cell);
 Vue.use(CellGroup);
 Vue.use(Grid);

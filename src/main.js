@@ -14,9 +14,9 @@ import store from "@/store";
 Vue.config.productionTip = false
 
 new Vue({
-    //挂载vuex
-    store,
     //挂载router
     router,
+    //挂载vuex
+    store,
     render: h => h(App)
 }).$mount('#app')

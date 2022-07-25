@@ -24,3 +24,21 @@ export function refreshToken() {
 
     })
 }
+
+//编辑用户的个人资料：将来可以一次性修改所有的属性，也可以只修改一条属性
+export function editInfo(data) {
+    return request({
+        url:'/v1_0/user/profile',
+        method:'PATCH',
+        data
+    })
+}
+
+//编辑用的照片资料
+export function uploadImage(data) {
+    return request({
+        url:'/v1_0/user/photo',
+        method:'PATCH',
+        data
+    })
+}

@@ -5,7 +5,7 @@ import store from "@/store";
 //导入登录组件
 import login from "@/views/login";
 //导入轻提示
-import { Toast } from 'vant';
+import {Toast} from 'vant';
 
 Vue.use(VueRouter)
 Vue.use(Toast);
@@ -22,12 +22,18 @@ const routes = [
             {path: 'home', component: () => import('@/views/home')},
             {path: 'ask', component: () => import('@/views/ask')},
             {path: 'video', component: () => import('@/views/video')},
-            {path: 'my', component: () => import('@/views/my'), meta: {
-                needLogin: true//说明当前路由需要登录
-            }},
+            {
+                path: 'my', component: () => import('@/views/my'), meta: {
+                    needLogin: true//说明当前路由需要登录
+                }
+            },
         ]
+    },
+    {
+        path: '/my/edit', component: () => import('@/views/my/edit'), meta: {
+            needLogin: true//说明当前路由需要登录
+        }
     }
-
 ]
 
 const router = new VueRouter({
@@ -41,7 +47,7 @@ router.beforeEach((to, from, next) => {
     if (needLogin) {
         //需要登陆:在判断是否携带token
         //得到token
-        const token= store.state.token.token
+        const token = store.state.token.token
         if (token) {
             //有token,继续向下执行
             next()
@@ -52,7 +58,7 @@ router.beforeEach((to, from, next) => {
             //保存当前访问的路径
             next(`/login?url=${to.path}`)
         }
-    }else {
+    } else {
         // 不需要登陆
         next()
     }
