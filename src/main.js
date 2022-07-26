@@ -10,6 +10,8 @@ import '@/style/index.less'
 import 'amfe-flexible'
 //导入store
 import store from "@/store";
+//导入自己封装的过滤器
+import '@/filters'
 
 Vue.config.productionTip = false
 
