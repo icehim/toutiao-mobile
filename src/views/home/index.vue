@@ -18,13 +18,21 @@
 
     </van-nav-bar>
     <!--    频道区域-->
-    <van-tabs>
+    <van-tabs v-model="active">
       <van-tab v-for="(item,index) in channelList" :key="index" :title="item.name">
         <newList :channel_id="item.id">
-
         </newList>
       </van-tab>
+
+      <!--      频道管理图标-->
+      <van-icon class="channelIcon" name="wap-nav" @click="openChannel"/>
     </van-tabs>
+
+    <!--    频道组件-->
+    <van-action-sheet v-model="channelShow" title="频道管理" >
+<!--      <channel :channelList="channelList" :value="active" @input="(index) => (active=index)"> </channel>-->
+      <channel v-model="active" :channelList="channelList"> </channel>
+    </van-action-sheet>
   </div>
 </template>
 
@@ -35,10 +43,19 @@ export default {
   data() {
     return {
       //用来保存用户的频道数据
-      channelList: []
+      channelList: [],
+      // 控制频道结构的显示与隐藏
+      channelShow: false,
+      //选中元素的下标
+      active:0
     }
   },
   methods: {
+
+    //打开频道
+    openChannel(){
+      this.channelShow = true
+    },
     //单独封装一个放来用来得到频道数据
     async getUserChannel() {
       //请求接口得到用户的频道数据
@@ -52,7 +69,8 @@ export default {
     this.getUserChannel()
   },
   components: {
-    newList: () => import('./components/newsList')
+    newList: () => import('./components/newsList'),
+    channel: () => import('./components/channel')
   }
 }
 </script>
@@ -71,6 +89,22 @@ export default {
   .myicon {
     color: #fff;
     margin-right: 6px;
+  }
+
+  .channelIcon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+    height: 44px;
+    line-height: 44px;
+    width: 10%;
+    text-align: center;
+    background-color: #fff;
+  }
+
+  .van-tabs__nav--line.van-tabs__nav--complete {
+    width: 90%;
   }
 }
 
