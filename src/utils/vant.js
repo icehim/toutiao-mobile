@@ -9,7 +9,9 @@ import { Icon } from 'vant';
 import { Tab, Tabs } from 'vant';
 import { List } from 'vant';
 import { PullRefresh } from 'vant';
+import { ActionSheet } from 'vant';
 
+Vue.use(ActionSheet);
 Vue.use(PullRefresh);
 Vue.use(List);
 Vue.use(Tab);

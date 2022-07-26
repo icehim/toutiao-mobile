@@ -12,6 +12,10 @@ Vue.use(Toast);
 
 const routes = [
     {
+        path: '/',
+        redirect: '/login'
+    },
+    {
         path: '/login',
         component: login,
     },
@@ -33,7 +37,11 @@ const routes = [
         path: '/my/edit', component: () => import('@/views/my/edit'), meta: {
             needLogin: true//说明当前路由需要登录
         }
-    }
+    },
+    {
+        path: '/home/detail',
+        component: ()=>import('@/views/detail/index'),
+    },
 ]
 
 const router = new VueRouter({

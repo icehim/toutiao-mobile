@@ -2,7 +2,7 @@
   <div class="newsList">
     <van-pull-refresh @refresh="onRefresh" v-model="isLoading">
       <van-list @load="onload" v-model="loading" :finished="finished" finished-text="没有更多数据了">
-        <van-cell v-for="(item,index) in newList" :key="index" :title="item.title">
+        <van-cell v-for="(item,index) in newList" :key="index" :title="item.title" @click="toDetail(item.art_id)">
           <template #label>
             <!--图片区域-->
             <van-grid v-if="item.cover.type!==0" :border="false" :column-num="3">
@@ -45,6 +45,10 @@ export default {
     }
   },
   methods: {
+    //跳转到详情页
+    toDetail(art_id){
+      this.$router.push(`/home/detail?id=${art_id}`)
+    },
     //下拉刷新会触发
     onRefresh() {
       //将finished改为false
