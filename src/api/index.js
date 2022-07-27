@@ -3,6 +3,7 @@ import {login,getUserInfo,editInfo,uploadImage} from "@/api/login";
 import {getUserChannel,getNewList,getArticle,followAuth} from "@/api/home";
 import {getComments,setComment} from "@/api/comment";
 import {getAllChannel,addChanel,delChannel} from "@/api/channel";
+import {getThink} from "@/api/search";
 
 //暴露方法
 export const loginAPI = login
@@ -18,3 +19,4 @@ export const setCommentAPI = setComment
 export const getAllChannelAPI = getAllChannel
 export const addChanelAPI = addChanel
 export const delChannelAPI = delChannel
+export const getThinkAPI = getThink
