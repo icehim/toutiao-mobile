@@ -14,7 +14,7 @@
         <van-grid-item @click="changeIndex(index)" v-for="(item,index) in channelList" :key="index">
           <template #text>
             <span :class="{active:value===index}">{{ item.name }}</span>
-            <van-icon @click.stop="delChannel(index)" v-if="showCross && index" class="mycross" name="cross"/>
+            <van-icon @click.stop="delChannel(index,item.id)" v-if="showCross && index" class="mycross" name="cross"/>
           </template>
         </van-grid-item>
       </van-grid>
@@ -35,7 +35,8 @@
 </template>
 
 <script>
-import {getAllChannelAPI} from "@/api";
+import {getAllChannelAPI, addChanelAPI, delChannelAPI} from "@/api";
+import {setChannel} from "@/utils/auth";
 
 export default {
   //接受到的我的频道数据
@@ -69,16 +70,51 @@ export default {
   },
   methods: {
     //删除选中的我的频道
-    delChannel(index) {
+    //index要删除元素的下标
+    async delChannel(index, id) {
       this.channelList.splice(index, 1);
       //判断下标
       if (this.value > index) {
         this.$emit('input', this.value - 1);
       }
+      //保存操作后的频道数据
+      // 得到用户的token
+      const token = this.$store.state.token.token
+      if (token) {
+        // 已登陆：请求服务器
+        await delChannelAPI(id)
+      } else {
+        // 未登：录保存本地
+        //将我的频道保存到本地
+        setChannel(this.channelList)
+      }
+      this.$toast.success('删除频道成功')
     },
     //直接将item添加到我的频道
-    addChannel(item) {
+    async addChannel(item) {
+      //直接将item 添加到我的频道中
       this.channelList.push(item)
+      //数据的持久化
+      //得到token
+      const token = this.$store.state.token.token
+      //判断用户是否登录
+      if (token) {
+        // 已登陆：请求服务器
+        await addChanelAPI({
+          channels: [{
+            id: item.id,
+            seq: this.channelList.length + 1,
+          }]
+        })
+        //提示新增频道成功
+        this.$toast.success('新增频道成功')
+      } else {
+        // 未登：录保存本地
+        //将我的频道保存到本地
+        setChannel(this.channelList)
+        this.$toast.success('新增频道成功')
+      }
+
     },
     changeIndex(index) {
       // 不能在子组件中直接修改value，

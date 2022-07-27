@@ -23,3 +23,22 @@ export function getToken() {
 export function delToken() {
     window.localStorage.removeItem(MYTOKEN)
 }
+
+//封装一下操作频道的方法
+//统一定义一个频道的key
+const CHANNELKEY = 'toutiao-channel'
+
+//保存channel
+export function setChannel(value) {
+    window.localStorage.setItem(CHANNELKEY, JSON.stringify(value))
+}
+
+//获取channel
+export function getChannel(value) {
+    return JSON.parse(window.localStorage.getItem(CHANNELKEY))
+}
+
+//删除channel
+export function delChannel() {
+    window.localStorage.removeItem(CHANNELKEY)
+}
