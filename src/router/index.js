@@ -23,7 +23,11 @@ const routes = [
         path: '/layout',
         component: () => import('@/layout/index'),
         children: [
-            {path: 'home', component: () => import('@/views/home')},
+            {
+                path: 'home', component: () => import('@/views/home'), meta: {
+                    needKeep: true
+                }
+            },
             {path: 'ask', component: () => import('@/views/ask')},
             {path: 'video', component: () => import('@/views/video')},
             {
@@ -40,19 +44,19 @@ const routes = [
     },
     {
         path: '/home/detail',
-        component: ()=>import('@/views/detail/index'),
+        component: () => import('@/views/detail/index'),
     },
     {
         path: '/home/search',
-        component: ()=>import('@/views/search/index'),
+        component: () => import('@/views/search/index'),
     },
     {
         path: '/search/result',
-        component: ()=>import('@/views/result'),
+        component: () => import('@/views/result'),
     },
     {
         path: '/my/zhi',
-        component: ()=>import('@/views/zhi'),meta: {
+        component: () => import('@/views/zhi'), meta: {
             needLogin: true//说明当前路由需要登录
         }
     },

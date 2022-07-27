@@ -1,5 +1,5 @@
 <template>
-  <div class="newsList">
+  <div class="newsList" ref="newsList">
     <van-pull-refresh @refresh="onRefresh" v-model="isLoading">
       <van-list @load="onload" v-model="loading" :finished="finished" finished-text="没有更多数据了">
         <van-cell v-for="(item,index) in newList" :key="index" :title="item.title" @click="toDetail(item.art_id)">
@@ -41,12 +41,14 @@ export default {
       finished: false,
       timestamp: Date.now(),
       //设置下拉刷新组件的状态
-      isLoading: false
+      isLoading: false,
+      //定义滚动的距离
+      scrollTop:0,
     }
   },
   methods: {
     //跳转到详情页
-    toDetail(art_id){
+    toDetail(art_id) {
       this.$router.push(`/home/detail?id=${art_id}`)
     },
     //下拉刷新会触发
@@ -91,6 +93,17 @@ export default {
         this.finished = true
       }
     },
+  },
+  mounted() {
+    //设置元素滚动事件
+    this.$refs.newsList.onscroll = () => {
+      //匿名函数，this指向的是window对象
+      //记录下距离
+      this.scrollTop = this.$refs.newsList.scrollTop
+    }
+  },
+  activated() {
+    this.$refs.newsList.scrollTop = this.scrollTop
   }
 }
 </script>
