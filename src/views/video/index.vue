@@ -1,6 +1,6 @@
 <template>
   <div>
-    视频!
+    视频接口暂未开放!
   </div>
 </template>
 

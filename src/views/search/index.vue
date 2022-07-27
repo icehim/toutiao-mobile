@@ -15,7 +15,7 @@
           <van-icon name="cross" @click="clear"/>
         </template>
       </van-cell>
-      <van-cell v-for="(item,index) in historyList" :key="index" :title="item"/>
+      <van-cell v-for="(item,index) in historyList" :key="index" :title="item" @click="hisToResult(item)"/>
     </van-cell-group>
     <!--联想区域-->
     <van-cell-group v-else>
@@ -46,6 +46,9 @@ export default {
     }
   },
   methods: {
+    hisToResult(item) {
+      this.$router.push(`/search/result?key=${item}`);
+    },
     //清除历史记录
     clear() {
       this.$dialog.confirm({

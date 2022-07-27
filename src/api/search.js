@@ -9,3 +9,11 @@ export function getThink(params) {
         params
     })
 }
+
+//获取搜索结果
+export function getResult(params) {
+    return request({
+        url:'/v1_0/search',
+        params
+    })
+}

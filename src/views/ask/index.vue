@@ -1,6 +1,6 @@
 <template>
   <div>
-    问答!
+    问答接口暂未开放!
   </div>
 </template>
 
