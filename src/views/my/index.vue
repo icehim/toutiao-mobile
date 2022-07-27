@@ -25,7 +25,7 @@
       <!--其他信息-->
       <van-cell-group>
         <van-cell to="/my/edit" title="编辑资料" is-link icon="edit"/>
-        <van-cell title="小智同学" is-link icon="chat-o"/>
+        <van-cell to="/my/zhi" title="小智同学" is-link icon="chat-o"/>
         <van-cell title="系统设置" is-link icon="setting-o"/>
         <van-cell @click="logout" title="退出登录" is-link icon="info-o"/>
       </van-cell-group>
@@ -65,7 +65,7 @@ export default {
       //重新回到登录页面
       this.$router.push('/login');
       //提示推出成成功
-      this.$toast.success('推出成功');
+      this.$toast.success('退出成功');
     }
   }
 }

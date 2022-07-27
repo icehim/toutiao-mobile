@@ -10,7 +10,9 @@ import { Tab, Tabs } from 'vant';
 import { List } from 'vant';
 import { PullRefresh } from 'vant';
 import { ActionSheet } from 'vant';
+import { Search } from 'vant';
 
+Vue.use(Search);
 Vue.use(ActionSheet);
 Vue.use(PullRefresh);
 Vue.use(List);

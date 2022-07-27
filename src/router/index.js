@@ -50,6 +50,12 @@ const routes = [
         path: '/search/result',
         component: ()=>import('@/views/result'),
     },
+    {
+        path: '/my/zhi',
+        component: ()=>import('@/views/zhi'),meta: {
+            needLogin: true//说明当前路由需要登录
+        }
+    },
 ]
 
 const router = new VueRouter({
