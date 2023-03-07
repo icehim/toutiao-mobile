@@ -6,10 +6,8 @@
 >
 > 技术栈：vue2全家桶 + Vant + axios + Socket.io。
 >
-> 在线地址: [点此访问](https://project.icehim.com/toutiao-mobile/index.html#/login)，F12打开手机模拟可完整展示。
->
 > 账号：13911111111
-> 密码：246810
+>密码：246810
 
 > **安装环境：**
 >
